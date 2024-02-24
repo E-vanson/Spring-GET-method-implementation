@@ -31,4 +31,17 @@ public class CashCardJsonTest {
         //assertThat is part of assertj library
         //assertThat(42).isEqualTo(42);
     }
+
+    @Test
+    void cashCardDeserializationTest()throws IOException{
+        String expected = """
+                {
+                "id":99,
+                "amount":123.45
+                }
+                """;
+        assertThat(json.parse(expected)).isEqualTo(new CashCard(99L,123.45));
+        assertThat(json.parseObject(expected).id()).isEqualTo(99);
+        assertThat(json.parseObject(expected).amount()).isEqualTo(123.45);
+    }
 }
